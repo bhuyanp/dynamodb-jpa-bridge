@@ -15,6 +15,9 @@ public abstract class DDbCrudRepository<T extends DDbEntity, R, S> extends DDbRe
     public DDbCrudRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
         super(dynamoDbEnhancedClient);
     }
+    public DDbCrudRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient, boolean consistentRead) {
+        super(dynamoDbEnhancedClient, consistentRead);
+    }
 
 
 

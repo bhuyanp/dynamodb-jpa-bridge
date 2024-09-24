@@ -21,7 +21,7 @@ class TableWithSortRepositoryTest extends TestApplicationTests {
     @Autowired
     private TableWithSortCrudRepository tableWithSortRepository;
 
-    private static List<TableWithSort> SORT_TABLE_ENTITIES = List.of(
+    private static final List<TableWithSort> SORT_TABLE_ENTITIES = List.of(
             new TableWithSort("test1", "sort11", "Record Title 1"),
             new TableWithSort("test2", "sort21", "Record Title 2"),
             new TableWithSort("test2", "sort22", "Record Title 3"),
@@ -93,7 +93,7 @@ class TableWithSortRepositoryTest extends TestApplicationTests {
     }
 
     @Test
-    void existsBy_match() {
+    void recordMatchingPartAndSortKey_shouldExist() {
         //given
         TableWithSort tableWithSort = SORT_TABLE_ENTITIES.get(0);
         String partitionKey = tableWithSort.getId();
@@ -107,14 +107,26 @@ class TableWithSortRepositoryTest extends TestApplicationTests {
     }
 
     @Test
-    void existsBy_noMatch() {
+    void recordNotMatchingSortKey_shouldNotExist() {
         //given
         TableWithSort tableWithSort = SORT_TABLE_ENTITIES.get(0);
         String partitionKey = tableWithSort.getId();
-        String sortKey = tableWithSort.getSort();
 
         //when
         boolean existsBy = tableWithSortRepository.existsBy(partitionKey, "sortKey");
+
+        //then
+        assertThat(existsBy).isFalse();
+    }
+
+    @Test
+    void recordNotMatchingPartKey_shouldNotExist() {
+        //given
+        TableWithSort tableWithSort = SORT_TABLE_ENTITIES.get(0);
+        String sortKey = tableWithSort.getSort();
+
+        //when
+        boolean existsBy = tableWithSortRepository.existsBy("partitionKey", sortKey);
 
         //then
         assertThat(existsBy).isFalse();

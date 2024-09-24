@@ -11,6 +11,6 @@ public class TableWithPartitionCrudRepository extends DDbCrudRepository<TableWit
 
     @Autowired
     public TableWithPartitionCrudRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
-        super(dynamoDbEnhancedClient);
+        super(dynamoDbEnhancedClient, true);
     }
 }

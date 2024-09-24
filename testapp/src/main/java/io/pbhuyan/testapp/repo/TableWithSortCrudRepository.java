@@ -11,6 +11,6 @@ public class TableWithSortCrudRepository extends DDbCrudRepository<TableWithSort
 
     @Autowired
     public TableWithSortCrudRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
-        super(dynamoDbEnhancedClient);
+        super(dynamoDbEnhancedClient, true);
     }
 }

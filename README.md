@@ -76,6 +76,8 @@ There are two types of Repository to choose from.
 NOTE: 
 1. Partition key and sort key(if available) type provided in the repo and entity must match with each other.
 2. Entity with only primary key need to set the sort key type as Void.
+3. For consistent read for more reliable transactions call
+   super(dynamoDbEnhancedClient, true);
 
 ```
 @Repository
@@ -84,6 +86,8 @@ public class CustomerCrudRepository extends DDbCrudRepository<Customer, String, 
     @Autowired
     public CustomerCrudRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
         super(dynamoDbEnhancedClient);
+        // For consistent read use below 
+        //super(dynamoDbEnhancedClient, true);
     }
 }
 ```
