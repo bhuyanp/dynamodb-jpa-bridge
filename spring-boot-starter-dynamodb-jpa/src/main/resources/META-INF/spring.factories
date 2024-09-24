@@ -1,0 +1,3 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+io.pbhuyan.dynamodbjpa.exception.failure.DDbRepoFailureAnalyzer,\
+io.pbhuyan.dynamodbjpa.exception.failure.DDbConfigFailureAnalyzer
